@@ -28,7 +28,7 @@ bool detector_call::is_call_needed(int route_decision_no, double veh_pos, double
 		signal_head_pos - (veh_pos)<=6*(veh_speed)&&
 		veh_speed_mph>45 &&
 		signal_head_pos - (veh_pos)==(veh_speed)*5.5 &&
-		signal_head_pos - (veh_pos)== (veh_speed)*4) {
+		signal_head_pos - (veh_pos)==(veh_speed)*4) {
 		put_call = true;
 		/*	cout << "Vehicle position from signal head" << signal_head_pos - (veh_pos)<<endl;
 		cout<<"2.5 seconds from the stop bar" << (veh_speed)*2.5<<endl;

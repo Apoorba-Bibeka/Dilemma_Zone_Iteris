@@ -43,10 +43,8 @@ int main(int argc, char* argv[]) {
 
 
 
-		bstr_t Path_of_COM_example_network = "C:\\Users\\a-bibeka\\Dropbox\\TTI_Projects\\0-1-6934 TSC Settings Sunkari\\Through_UpStrmRadar_Scenario_2ln\\"; // always use \\ at the end
+		bstr_t Path_of_COM_example_network = "C:\\Users\\a-bibeka\\Dropbox\\TTI_Projects\\0-1-6934 TSC Settings Sunkari\\Through_UpStrm_IterisStudy\\"; // always use \\ at the end
 		//Network file name																					 // Load a Vissim Network :
-
-		//bstr_t Path_of_COM_example_network = "C:\\Users\\a-bibeka\\Dropbox\\TTI_Projects\\0-1-6934 TSC Settings Sunkari\\SimultaneiousGapOutSen\\"; // always use \\ at the end
 
 		bstr_t Filename = Path_of_COM_example_network;
 		Filename = Filename + "Through_2Ln.inpx";
