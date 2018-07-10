@@ -127,6 +127,7 @@ int main(int argc, char* argv[]) {
 			int veh_number;
 			double veh_speed;
 			double veh_position;
+			double veh_len;
 			int veh_Route_Dec_no; //Purple part of the routing decision 
 			int veh_Route_no;    // blue part of the routing decision
 
@@ -164,7 +165,7 @@ int main(int argc, char* argv[]) {
 			Vissim->Simulation->PutAttValue("RandSeed", 1);
 			Vissim->Simulation->PutAttValue("RandSeedIncr", 1);
 			//   Change to quick mode later
-			Vissim->Graphics->CurrentNetworkWindow->PutAttValue("QuickMode", 1);
+			Vissim->Graphics->CurrentNetworkWindow->PutAttValue("QuickMode", 0);
 
 			bool switch_Amber_2 = FALSE, switch_Amber_6 = FALSE;
 
@@ -198,7 +199,7 @@ int main(int argc, char* argv[]) {
 					//Check if the route no and route decision no are what we want 
 					veh_Route_Dec_no = Vehicle_vissim->GetAttValue("RoutDecNo");
 					veh_Route_no = Vehicle_vissim->GetAttValue("RouteNo");
-
+					veh_len = Vehicle_vissim->GetAttValue("Length");
 					//cout << veh_Route_Dec_no<<endl;
 					//Check if the route decision number and route number are 20 and 200 respectively (This is based on the network coding)
 					// This would change if we made changes to the routing parameters in the network.
@@ -210,9 +211,9 @@ int main(int argc, char* argv[]) {
 						veh_position = Vehicle_vissim->GetAttValue("Pos");
 
 						//Check for detector 200 and 600 which contains the routing decision number 1
-						if (det_call.is_call_needed(veh_Route_Dec_no, veh_position, veh_speed) && signal_state_6 == gr) {
+						if (det_call.is_call_needed(veh_Route_Dec_no, veh_position, veh_speed, veh_len) && signal_state_6 == gr) {
 							det_600->PutAttValue("ManActuation", DETECTION);
-							//cout << "Dilemma zone detection 600 detector" << endl;
+							cout << "Dilemma zone detection 600 detector" << endl;
 							break_600 = true;
 						}
 						else {
@@ -228,7 +229,7 @@ int main(int argc, char* argv[]) {
 						veh_position = Vehicle_vissim->GetAttValue("Pos");
 						//	det_call.add_vehicles(veh_number, veh_speed, veh_position, veh_Route_Dec_no);
 						//Check for detector 200 and 600 which contains the routing decision number 1
-						if (det_call.is_call_needed(veh_Route_Dec_no, veh_position, veh_speed) && signal_state_2 == gr) {
+						if (det_call.is_call_needed(veh_Route_Dec_no, veh_position, veh_speed,veh_len) && signal_state_2 == gr) {
 							det_200->PutAttValue("ManActuation", DETECTION);
 							//cout << "Dilemma zone detection 200 detector" << endl;
 							break_200 = true;
@@ -265,7 +266,7 @@ int main(int argc, char* argv[]) {
 					//Check if the route no and route decision no are what we want 
 					veh_Route_Dec_no = Vehicle_vissim->GetAttValue("RoutDecNo");
 					veh_Route_no = Vehicle_vissim->GetAttValue("RouteNo");
-
+					veh_len = Vehicle_vissim->GetAttValue("Length");
 					//cout << veh_Route_Dec_no<<endl;
 					//Check if the route decision number and route number are 20 and 200 respectively (This is based on the network coding)
 					// This would change if we made changes to the routing parameters in the network.
@@ -277,8 +278,8 @@ int main(int argc, char* argv[]) {
 						veh_position = Vehicle_vissim->GetAttValue("Pos");
 
 						//Check for detector 200 and 600 which contains the routing decision number 1
-						if (det_call.is_call_needed(veh_Route_Dec_no, veh_position, veh_speed) && is_sg_6_amber) {
-							//cout <<"Run No"<<run_no<< "Vehicle No is: " << veh_number << "Signal state for 6: " << signal_state_6<< endl;
+						if (det_call.is_call_needed(veh_Route_Dec_no, veh_position, veh_speed, veh_len) && is_sg_6_amber) {
+							cout <<"Run No"<<run_no<< "Vehicle No is: " << veh_number << "Signal state for 6: " << signal_state_6<< endl;
 							fout << ScenarioN << "," << run_no << "," << veh_number << "," << 6 << endl;
 						}
 					}
@@ -290,7 +291,7 @@ int main(int argc, char* argv[]) {
 						veh_position = Vehicle_vissim->GetAttValue("Pos");
 						//	det_call.add_vehicles(veh_number, veh_speed, veh_position, veh_Route_Dec_no);
 						//Check for detector 200 and 600 which contains the routing decision number 1
-						if (det_call.is_call_needed(veh_Route_Dec_no, veh_position, veh_speed) && is_sg_2_amber) {
+						if (det_call.is_call_needed(veh_Route_Dec_no, veh_position, veh_speed, veh_len) && is_sg_2_amber) {
 							//cout << "Run No" << run_no << "Vehicle No is: " << veh_number << "Signal state for 2: " << signal_state_6 << endl;
 							fout << ScenarioN << "," << run_no << "," << veh_number << "," << 2 << endl;
 						}

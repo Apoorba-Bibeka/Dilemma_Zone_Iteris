@@ -8,7 +8,7 @@ detector_call::detector_call(double sig_head_2_pos_, double sig_head_6_pos) :sig
 
 
 
-bool detector_call::is_call_needed(int route_decision_no, double veh_pos, double veh_speed)
+bool detector_call::is_call_needed(int route_decision_no, double veh_pos, double veh_speed, double veh_len)
 {
 	bool put_call = false;
 	double signal_head_pos = -9999;
@@ -25,15 +25,15 @@ bool detector_call::is_call_needed(int route_decision_no, double veh_pos, double
 	//5th condition - Check if distance of vehicle from signal head is equal to 5.5 seconds (spacing)
 	if (
 		veh_pos <= signal_head_pos&&
-		signal_head_pos - (veh_pos)<=6*(veh_speed)&&
+		signal_head_pos - (veh_pos)<=6*(veh_speed) &&
 		veh_speed_mph>45 &&
-		signal_head_pos - (veh_pos)==(veh_speed)*5.5 &&
-		signal_head_pos - (veh_pos)==(veh_speed)*4) {
+		signal_head_pos - (veh_pos)>=((veh_speed)*5.5-veh_len) && signal_head_pos - (veh_pos) <= (6+(veh_speed)*5.5) &&
+		signal_head_pos - (veh_pos)>=((veh_speed)*4-veh_len) && signal_head_pos - (veh_pos) <= (6+(veh_speed)*4)) {
 		put_call = true;
-		/*	cout << "Vehicle position from signal head" << signal_head_pos - (veh_pos)<<endl;
+			cout << "Vehicle position from signal head" << signal_head_pos - (veh_pos)<<endl;
 		cout<<"2.5 seconds from the stop bar" << (veh_speed)*2.5<<endl;
 		cout << "5.5 seconds from the stop bar" << (veh_speed)*5.5<<endl;
-		std::this_thread::sleep_for(std::chrono::seconds(2));*/
+		std::this_thread::sleep_for(std::chrono::seconds(2));
 	}
 	return put_call;
 }

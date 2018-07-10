@@ -19,7 +19,7 @@ class detector_call
 	const double signal_head_pos_2, signal_head_pos_6;
 public:
 	detector_call(double sig_head_2_pos_, double sig_head_6_pos);
-	bool is_call_needed(int route_decision_no, double veh_pos, double veh_speed);
+	bool is_call_needed(int route_decision_no, double veh_pos, double veh_speed,double veh_len);
 	~detector_call();
 };
 
