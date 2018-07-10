@@ -3,8 +3,9 @@
 //Apoorba Bibeka 2016
 //Date: Dec 9 2016
 //Date Modified: July 27 2017
+// Date Modified : July 10 2018
 // -----------------
-//Adding dilemma zone detection for two major high speed approach
+//Adding dilemma zone detection with Iteris Detector
 //= == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == =
 
 
