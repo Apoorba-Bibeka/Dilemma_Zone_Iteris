@@ -23,12 +23,15 @@ bool detector_call::is_call_needed(int route_decision_no, double veh_pos, double
 	//3rd condition - Check if vehicle speed is greater than 30 mph //Edit 12/07 - Speed>45 Mph
 	//4rth condition - Check if distance of vehicle from signal head is equal to 4 seconds (spacing)
 	//5th condition - Check if distance of vehicle from signal head is equal to 5.5 seconds (spacing)
+
+	bool cond_4_5 = false;
+	cond_4_5 = ((signal_head_pos - (veh_pos) >= ((veh_speed)*5.5 - veh_len) && signal_head_pos - (veh_pos) <= (6 + (veh_speed)*5.5)) ||
+		(signal_head_pos - (veh_pos) >= ((veh_speed) * 4 - veh_len) && signal_head_pos - (veh_pos) <= (6 + (veh_speed) * 4)));
 	if (
 		veh_pos <= signal_head_pos&&
 		signal_head_pos - (veh_pos)<=6*(veh_speed) &&
-		veh_speed_mph>45 &&
-		signal_head_pos - (veh_pos)>=((veh_speed)*5.5-veh_len) && signal_head_pos - (veh_pos) <= (6+(veh_speed)*5.5) &&
-		signal_head_pos - (veh_pos)>=((veh_speed)*4-veh_len) && signal_head_pos - (veh_pos) <= (6+(veh_speed)*4)) {
+		veh_speed_mph>45 && cond_4_5)
+		 {
 		put_call = true;
 			cout << "Vehicle position from signal head" << signal_head_pos - (veh_pos)<<endl;
 		cout<<"2.5 seconds from the stop bar" << (veh_speed)*2.5<<endl;
